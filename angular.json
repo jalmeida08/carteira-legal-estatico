@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "carteira-legal-estatico"
+    }
+  },
+  "defaultProject": "carteira-legal-estatico",
+  "cli": {
+    "analytics": "23faa66f-f98f-4e43-a2b3-1713ff18dc58"
+  }
 }
