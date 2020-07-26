@@ -10,7 +10,8 @@ export class AreaPublicaService {
     constructor(private _http: HttpClient) { }
 
     public entrarCarteiraLegal(usuario: Usuario): Observable<any>{
-        return 
+        return this._http
+            .post(`${}`)
     }
 
 }
