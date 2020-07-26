@@ -1,1 +1,4 @@
-body{background-color: #50ace4 !important;}
+body { background-color: #50ace4; }
+.direita { float: right }
+.box { background-color: #FFF; border-radius: 10px; padding: 5%; margin-top: 50%;}
+.objeto-centro{ display: flex; flex-direction: row; justify-content: center; align-items: center }
