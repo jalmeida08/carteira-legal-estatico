@@ -1,14 +1,18 @@
 <div class="objeto-centro">
     <div class="col-sm-3 form">
         <div class="box">
-            <form>
+            <form method="post" (submit)="salvar()">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="pessoa.nome">
+                </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="numCpf">
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="nome" [(ngModel)]="usuario.email">
                 </div>
                 <div class="form-group">
                     <label for="numCpf">CPF</label>
-                    <input type="number" class="form-control" id="numCpf" name="numCpf"/>
+                    <input type="number" class="form-control" id="numCpf" name="numCpf" [(ngModel)]="pessoa.numCpf"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>

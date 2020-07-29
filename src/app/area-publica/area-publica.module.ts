@@ -4,10 +4,13 @@ import { LoginModule } from './login/login.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { EntrarCarteiraLegalComponent } from './entrar-carteira-legal/entrar-carteira-legal.component';
+import { AreaPublicaService } from './area-pblica.service';
+import { AtivarContaCarteiraLegalComponent } from "./ativar-conta-carteira-legal/ativar-conta-carteira-legal.component";
 
 @NgModule({
     declarations: [
         EntrarCarteiraLegalComponent,
+        AtivarContaCarteiraLegalComponent,
     ],
     imports: [
         CommonModule,
@@ -17,7 +20,10 @@ import { EntrarCarteiraLegalComponent } from './entrar-carteira-legal/entrar-car
     ],
     exports: [
         EntrarCarteiraLegalComponent,
+        AtivarContaCarteiraLegalComponent,
     ],
-    providers: [],
+    providers: [
+        AreaPublicaService
+    ],
 })
 export class AreaPublicaModule {}

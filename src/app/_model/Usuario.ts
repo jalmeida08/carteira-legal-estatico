@@ -1,9 +1,9 @@
-import { Acesso } from "./Acesso";
 import { Pessoa } from "./Pessoa";
+import { Acesso } from "./Acesso";
 
 export class Usuario {
     public id: number;
-    public pessoa: Pessoa;
+    public pessoa: Pessoa = new Pessoa();
     public usuario: string;
     public email: string;
     public senha: string;
@@ -12,4 +12,4 @@ export class Usuario {
     public ultimoLogin: Date;
     public chaveAtivacao: string;
     public ativo: boolean;
-}
+};
