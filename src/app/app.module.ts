@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlertaModule } from "./_diretiva/alerta/alerta.module";
 import { Interceptor } from './_data/Interceptor.interceptor';
 import { DataService } from './services/data.service';
+import { AreaPrivadaModule } from "./area-privada/area-privada.module"
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DataService } from './services/data.service';
 
     routing,
     AreaPublicaModule,
+    AreaPrivadaModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

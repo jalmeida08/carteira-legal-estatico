@@ -5,6 +5,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/c
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { map, catchError, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Injectable()
 export class HTTPStatus {
@@ -20,14 +21,16 @@ export class HTTPStatus {
     }
 }
 
-
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
     private _requests = 0;
     constructor(
+        private _dataService: DataService,
         private _status: HTTPStatus,
         private _router: Router
-    ) {}
+    ) {
+        _dataService = this._dataService;
+    }
 
     intercept(
         req: HttpRequest<any>,
@@ -36,18 +39,21 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
         ++this._requests;
         this._status.setHttpStatus(true);
         
+        this._dataService.verificarSessao();
+        const token = 'Bearer#'.concat(this._dataService.montarTokenSessao());
         
         let dupReq = req.clone({
                 headers: req.headers
-                    .set('Content-Type', "application/json")
+                    .set('Authorization', token)
+                    .set('Content-Type', "APPLICATION/JSON")
                 });
         
-        if(req.url.indexOf("localhost") < 0){
-            dupReq = req.clone({
-                headers: req.headers
-                    .set('Content-Type', "application/json")
-            });
-        }
+        // if(req.url.indexOf("localhost") < 0){
+        //     dupReq = req.clone({
+        //         headers: req.headers
+        //             .set('Content-Type', "application/json")
+        //     });
+        // }
     
         return next.handle(dupReq).pipe(
             map(event => {
@@ -57,6 +63,8 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
                 
                 if (error.status === 0) {
                     console.log("401");
+                    this._dataService.limparMensagens();
+                    this._dataService.alerta("Usuário não autenticado", "warning", "Alerta!")
                     this._router.navigate(['']);
                 }
                 return throwError(error);
@@ -68,6 +76,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
         );
     }
 }
+
 
 
 @NgModule({

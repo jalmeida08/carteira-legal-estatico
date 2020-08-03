@@ -1,0 +1,126 @@
+<div class="modal" tabindex="-1" role="dialog" id="modalSemPagamentoAtivo" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atenção!!!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Ops... Vi aqui que você não tem pagamento cadastrado</p>
+                <p>Deseja efetuar o registro de alguma renda?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-primary" (click)="abrirModalCadastroPagamento()">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modalCadastrarPagamento" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form (submit)="salvar()" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar pagamento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input type="text"  class="form-control" id="titulo" name="titulo" [(ngModel)]="pagamento.titulo">
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrião</label>
+                        <input type="texto" class="form-control" id="descricao" name="descricao" [(ngModel)]="pagamento.descricao">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataReferencia">Data Recebimento</label>
+                        <input type="date" class="form-control" id="dataReferencia" name="dataReferencia" [(ngModel)]="pagamento.dataReferencia">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="valor">Valor</label>
+                        <input type="number" class="form-control" id="valor" name="valor" [(ngModel)]="pagamento.valor">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 card-saldo-pagamento">
+            <div class="texto-saldo-pagamento">
+                <div>
+                    <span>Saldo Disponível</span>
+                    <h1 class="texto-valor">{{ totalPagamento }}</h1>
+                </div>
+            </div>
+            <div class="botoes-opcoes" (click)="abrirModalDespesa()">
+                <span class="material-icons">add_circle</span>
+                <span>Despesa</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modalAdicionarDespesa" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form (submit)="adicionarDespesa()" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar despesa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input type="text"  class="form-control" id="titulo" name="titulo" [(ngModel)]="despesa.titulo">
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrião</label>
+                        <input type="texto" class="form-control" id="descricao" name="descricao" [(ngModel)]="despesa.descricao">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataReferencia">Data Vencimento</label>
+                        <input type="date" class="form-control" id="dataReferencia" name="dataReferencia" [(ngModel)]="despesa.dataVencimento">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dataReferencia">Data Pagamento</label>
+                        <input type="date" class="form-control" id="dataReferencia" name="dataReferencia" [(ngModel)]="despesa.dataPagamento">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dataReferencia">Data Referência</label>
+                        <input type="date" class="form-control" id="dataReferencia" name="dataReferencia" [(ngModel)]="despesa.dataReferencia">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valor">Valor</label>
+                        <input type="number" class="form-control" id="valor" name="valor" [(ngModel)]="despesa.valor">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

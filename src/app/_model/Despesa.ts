@@ -9,5 +9,6 @@ export class Despesa {
     public dataVencimento: Date;
     public dataPagamento: Date;
     public dataReferencia: Date;
+    public valor: number;
     public ativo: boolean;
 }

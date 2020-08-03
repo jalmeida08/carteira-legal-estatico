@@ -12,25 +12,28 @@ export class DataService {
     constructor(private _router: Router) {}
 
     public verificarSessao(): void{
-        let usrAluguelLegal   = localStorage.getItem('usrAluguelLegal');
-        let tkAluguelLegal    = localStorage.getItem('tkAluguelLegal');
-        let usrIdAluguelLegal = localStorage.getItem('usrIdAluguelLegal');
-
-        if(!usrAluguelLegal || !tkAluguelLegal || !usrIdAluguelLegal ){
-            // this._router.navigate(['']);
-            // return;
+        let usrCarteiraLegal   = localStorage.getItem('usrCarteiraLegal');
+        let tkCarteiraLegal    = localStorage.getItem('tkCarteiraLegal');
+        let usrIdCarteiraLegal = localStorage.getItem('usrIdCarteiraLegal');
+        console.log(usrCarteiraLegal, tkCarteiraLegal, usrIdCarteiraLegal);
+        
+        if(!usrCarteiraLegal || !tkCarteiraLegal || !usrIdCarteiraLegal ){
+            this._router.navigate(['']);
+            return;
         }
     }
 
     public registrarSessao(usuario: Usuario): void {
-        localStorage.setItem('usrIdAluguelLegal', usuario.id.toString());
-        localStorage.setItem('usrAluguelLegal', usuario.usuario);
-        localStorage.setItem('tkAluguelLegal', usuario.token);
+        localStorage.setItem('usrIdCarteiraLegal', usuario.id.toString());
+        localStorage.setItem('usrCarteiraLegal', usuario.usuario);
+        localStorage.setItem('tkCarteiraLegal', usuario.token);
     }
     
-    public recuperarSessao(): string{
-        if(localStorage.getItem('tkAluguelLegal'))
-            return localStorage.getItem('tkAluguelLegal'); 
+    public montarTokenSessao(): string{
+        let tokenSessao:string = localStorage.getItem('tkCarteiraLegal');
+        let idUsuarioSessao:string =  localStorage.getItem('usrIdCarteiraLegal');
+        if(tokenSessao && idUsuarioSessao)
+            return tokenSessao.concat("#").concat(idUsuarioSessao); 
         return "";
 
     }
