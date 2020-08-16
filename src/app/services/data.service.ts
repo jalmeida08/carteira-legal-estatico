@@ -15,7 +15,6 @@ export class DataService {
         let usrCarteiraLegal   = localStorage.getItem('usrCarteiraLegal');
         let tkCarteiraLegal    = localStorage.getItem('tkCarteiraLegal');
         let usrIdCarteiraLegal = localStorage.getItem('usrIdCarteiraLegal');
-        console.log(usrCarteiraLegal, tkCarteiraLegal, usrIdCarteiraLegal);
         
         if(!usrCarteiraLegal || !tkCarteiraLegal || !usrIdCarteiraLegal ){
             this._router.navigate(['']);

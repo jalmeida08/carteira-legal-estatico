@@ -23,13 +23,13 @@ export class AreaPrivadaService {
             .pipe( map( res => { return res; }) );
     }
 
-    public adicionarDespesa(despesa: Despesa){
+    public adicionarDespesa(despesa: Despesa): Observable<any>{
         return this._http
             .post(`${urlBase.url}/despesa/adicionar`, despesa)
             .pipe( map( res => { return res; }) );
     }
 
-    public listaDespesa(){
+    public listaDespesa(): Observable<any>{
         return this._http
             .get(`${urlBase.url}/despesa/lista-despesa`)
             .pipe( map( res => { return res; }) );

@@ -62,19 +62,55 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 card-saldo-pagamento">
+
             <div class="texto-saldo-pagamento">
                 <div>
                     <span>Saldo Disponível</span>
                     <h1 class="texto-valor">{{ totalPagamento }}</h1>
                 </div>
+                <div>
+                    <span>Total Despesa em aberto</span>
+                    <h1 class="texto-valor" style="color: red;">- {{ totalDespesa }}</h1>
+                </div>
             </div>
-            <div class="botoes-opcoes" (click)="abrirModalDespesa()">
-                <span class="material-icons">add_circle</span>
-                <span>Despesa</span>
+
+            <div class="botoes-opcoes">
+                <div class="row">
+                    <div class="botao-home-opcao"  (click)="abrirModalCadastroPagamento()">
+                        <div class="icon-isolado" style="text-align: center;">
+                            <span class="material-icons">add_circle</span>
+                        </div>
+                        <span>Pagamento</span>
+                    </div>
+    
+                    <div class="botao-home-opcao"(click)="abrirModalDespesa()">
+                        <div class="icon-isolado" style="text-align: center;">
+                            <span class="material-icons">add_circle</span>
+                        </div>
+                        <span>Despesa</span>
+                    </div>
+                    
+                </div>
+
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <h1>Despesas</h1>
+        <div class="col-sm-12 lista-despesa">
+            <div class="objeto-despesa" *ngFor="let item of listaDespesa">
+                <span>{{ item.titulo }}</span>
+                <span>{{ item.descricao }}</span>
+                <span>{{ item.dataVencimento }}</span>
+                <span>{{ item.valor }}</span>
+            </div>
+        </div>
+
+    </div>
 </div>
+
+
 
 <div class="modal" tabindex="-1" role="dialog" id="modalAdicionarDespesa" >
     <div class="modal-dialog" role="document">

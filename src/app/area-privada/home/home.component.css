@@ -1,3 +1,5 @@
-.card-saldo-pagamento { background-color: #FFF;height: 300px; position: fixed; }
+.card-saldo-pagamento { background-color: #FFF;height: 300px; }
 .texto-saldo-pagamento { text-align: center; }
 .botoes-opcoes{ bottom: 0; position: absolute;}
+.botao-home-opcao { margin: 0 10px; height: 50%;}
+.botao-home-opcao:hover { cursor: pointer; color: rgba(0, 0, 0, 0.6);}

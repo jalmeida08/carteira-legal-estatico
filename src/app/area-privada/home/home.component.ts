@@ -15,7 +15,9 @@ export class HomeComponent implements OnInit {
     public pagamento: Pagamento = new Pagamento();
     public despesa: Despesa = new Despesa();
     public totalPagamento: number = 0;
+    public totalDespesa: number = 0;
     public listaPagamento: Array<Pagamento> = new Array<Pagamento>();
+    public listaDespesa: Array<Despesa> = new Array<Despesa>();
     
     constructor(
         private _dataService: DataService,
@@ -31,8 +33,7 @@ export class HomeComponent implements OnInit {
                 
                 res.forEach(item => {
                     
-                    this.totalPagamento =+ item.valor;
-                    console.log(this.totalPagamento);
+                    this.totalPagamento = this.totalPagamento + item.valor;
                 });
                
             })
@@ -41,10 +42,11 @@ export class HomeComponent implements OnInit {
     private consultarListaDespesa(){
         this._areaPrivadaService
             .listaDespesa()
-            .subscribe(res => {               
-                console.log(res);                                               
+            .subscribe(res => {
+                this.listaDespesa = res;
+                this.calcularDespesas(res);
             }, error=> {
-                console.log(error);
+                
             })
     }
 
@@ -80,6 +82,12 @@ export class HomeComponent implements OnInit {
         $('#modalAdicionarDespesa').modal('show');
     }
 
+    private calcularDespesas(listaDespesa: Array<Despesa>){
+        listaDespesa.forEach(item => {
+            this.totalDespesa = (this.totalDespesa + item.valor);
+        });
+    }
+    
     ngOnInit(): void { 
         this.consultarListaPagamento();
         this.consultarListaDespesa();
