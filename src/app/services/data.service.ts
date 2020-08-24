@@ -8,6 +8,7 @@ import { Alerta } from '../_diretiva/alerta/alerta';
 export class DataService {    
 
     public alertas: Array<Alerta> = new Array<Alerta>();
+    private rotasAreaPublica: Array<string> = new Array("", "ativar-conta-carteira-legal", "entrar-carteira-legal");
 
     constructor(private _router: Router) {}
 
@@ -16,9 +17,12 @@ export class DataService {
         let tkCarteiraLegal    = localStorage.getItem('tkCarteiraLegal');
         let usrIdCarteiraLegal = localStorage.getItem('usrIdCarteiraLegal');
         
+        
         if(!usrCarteiraLegal || !tkCarteiraLegal || !usrIdCarteiraLegal ){
-            this._router.navigate(['']);
-            return;
+            if(this.rotasAreaPublica.indexOf(this._router.url.split("/")[1]) < 0){
+                this._router.navigate(['']);
+                return;
+            }
         }
     }
 

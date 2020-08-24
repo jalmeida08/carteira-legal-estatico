@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
     public totalDespesa: number = 0;
     public listaPagamento: Array<Pagamento> = new Array<Pagamento>();
     public listaDespesa: Array<Despesa> = new Array<Despesa>();
+    private despesaSelecionada: Despesa = new Despesa();
+    private pagamentoSelecionada: Pagamento = new Pagamento();
     
     constructor(
         private _dataService: DataService,
@@ -30,9 +32,8 @@ export class HomeComponent implements OnInit {
             .subscribe(res => {
                 if(res.length == 0)
                     $('#modalSemPagamentoAtivo').modal('show')
-                
-                res.forEach(item => {
-                    
+                this.listaPagamento = res;
+                res.forEach(item => {                    
                     this.totalPagamento = this.totalPagamento + item.valor;
                 });
                
@@ -55,6 +56,69 @@ export class HomeComponent implements OnInit {
         $('#modalCadastrarPagamento').modal('show');
     }
 
+    public abrirModal(nomeModal: string, item){
+        this.despesaSelecionada = item;
+        this.pagamentoSelecionada = item;
+        $(nomeModal).modal('show');
+    }
+
+    public excluirPagamento(){
+        let id: number = this.pagamentoSelecionada.id;
+        this._areaPrivadaService
+            .excluirPagamento(id)
+            .subscribe(() => {
+                this.consultarListaPagamento();
+                this._dataService.alerta("Excluído com sucesso", "success", "Sucesso!!!");
+            }, error => {
+                this._dataService.alerta(error.error, "danger", "Erro!!!");
+            });
+    }
+
+    public excluirDespesa(){
+        let id: number = this.despesaSelecionada.id;
+        this._areaPrivadaService
+            .excluirDespesa(id)
+            .subscribe(() => {
+                this.consultarListaDespesa();
+                this._dataService.alerta("Excluído com sucesso", "success", "Sucesso!!!");
+            }, error => {
+                this._dataService.alerta(error.error, "danger", "Erro!!!");
+            });
+    }
+    
+    public atualizarDespesa(despesa: Despesa){
+        this._areaPrivadaService
+            .atualizarDespesa(despesa)
+            .subscribe(() => {
+                this._dataService.alerta("Atualizado com sucesso", "success", "Sucesso!!!");
+            }, error => {
+                this._dataService.alerta(error.error, "danger", "Erro!!!");
+            });
+    }
+    
+    public atualizarPagamento(pagamento: Pagamento){
+        this._areaPrivadaService
+            .atualizarPagamento(pagamento)
+            .subscribe(() => {
+                this._dataService.alerta("Atualizado com sucesso", "success", "Sucesso!!!");
+            }, error => {
+                this._dataService.alerta(error.error, "danger", "Erro!!!");
+            });
+    }
+
+    public pagarDespesa(idDespesa: number, datapagamento: Date){
+        this._areaPrivadaService
+            .pagarDespesa(idDespesa, datapagamento)
+            .subscribe(() => {
+                this._dataService.alerta("Despesa paga com sucesso", "success", "Sucesso!!!");
+            }, error => {
+                this._dataService.alerta(error.error, "danger", "Erro!!!");
+            });
+    }
+
+    public fecharModal(nomeModal: string){
+        $(nomeModal).modal('hide');
+    }
     public salvar(){
         this._areaPrivadaService
             .salvar(this.pagamento)

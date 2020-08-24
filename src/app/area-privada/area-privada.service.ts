@@ -34,4 +34,34 @@ export class AreaPrivadaService {
             .get(`${urlBase.url}/despesa/lista-despesa`)
             .pipe( map( res => { return res; }) );
     }
+
+    public pagarDespesa(id: number, dataPagamento: Date): Observable<any>{
+        return this._http
+            .get(`${urlBase.url}/despesa/${id}/${dataPagamento}`,)
+            .pipe( map( res => { return res; }) );
+    }
+
+    public excluirDespesa(id: number): Observable<any>{
+        return this._http
+            .delete(`${urlBase.url}/despesa/${id}`,)
+            .pipe( map( res => { return res; }) );
+    }
+
+    public atualizarDespesa(despesa: Despesa): Observable<any>{
+        return this._http
+            .put(`${urlBase.url}/despesa`, despesa)
+            .pipe( map( res => { return res; }) );
+    }
+    
+    public atualizarPagamento(pagamento: Pagamento): Observable<any>{
+        return this._http
+            .put(`${urlBase.url}/pagamento`, pagamento)
+            .pipe( map( res => { return res; }) );
+    }
+
+    public excluirPagamento(id: number): Observable<any>{
+        return this._http
+            .delete(`${urlBase.url}/pagamento/${id}`,)
+            .pipe( map( res => { return res; }) );
+    }
 }

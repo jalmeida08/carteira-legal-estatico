@@ -1,4 +1,108 @@
-<div class="modal" tabindex="-1" role="dialog" id="modalSemPagamentoAtivo" >
+<div class="encapsulamento-tela-saldo-botao-cad">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 card-saldo-pagamento">
+
+                <div class="texto-saldo-pagamento">
+                    <div>
+                        <span>Saldo Disponível</span>
+                        <h1 class="texto-valor">{{ totalPagamento }}</h1>
+                    </div>
+                    <div>
+                        <span>Total Despesa em aberto</span>
+                        <h1 class="texto-valor" style="color: red;">- {{ totalDespesa }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-container flex-row">
+        <div class="flex-item" (click)="abrirModalCadastroPagamento()">
+            <div class="icon-isolado">
+                <span class="material-icons">add_circle</span>
+            </div>
+            <span>Pagamento</span>
+        </div>
+        <div class="flex-item" (click)="abrirModalDespesa()">
+            <div class="icon-isolado">
+                <span class="material-icons">add_circle</span>
+            </div>
+            <span>Despesa</span>
+        </div>
+    </div>
+</div>
+
+<div class="tela-despesa-pagamento">
+    <section class="despesa">
+        <div class="titulo">
+            <span>Despesas</span>
+        </div>
+        <div class="lista-despesa">
+            <div class="objeto-despesa" *ngFor="let item of listaDespesa">
+                <div class="container-flex row-flex ">
+                    <div class="titulo-lista-despesa item-flex">
+                        {{ item.titulo }}
+                        <div class="subtitulo-lista-despesa">
+                            {{ item.descricao }}
+                        </div>
+                    </div>
+                    <div class="titulo-lista-despesa item-flex">
+                        Vencimento
+                        <div class="subtitulo-lista-despesa"> {{ item.dataVencimento | date: 'dd/MM/yyyy'}} </div>
+                    </div>
+                    <div class="titulo-lista-despesa item-flex">
+                        Valor
+                        <div class="subtitulo-lista-despesa">{{ item.valor }}</div>
+                    </div>
+                    <div class="titulo-lista-despesa icon-sem-flex">
+                        <span class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">more_vert</span>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" (click)="abrirModal('#modalAbrirDespesa', item)">Abrir</a>
+                            <a class="dropdown-item" (click)="abrirModal('#modalExcluirDespesa', item)">Editar</a>
+                            <a class="dropdown-item" (click)="abrirModal('#modalExcluirDespesa', item)">Excluir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pagamentos">
+        <div class="titulo">
+            <span>Pagamento</span>
+        </div>
+        <div class="lista-despesa">
+            <div class="objeto-despesa" *ngFor="let item of listaPagamento">
+                <div class="container-flex row-flex ">
+                    <div class="titulo-lista-despesa item-flex">
+                        {{ item.titulo }}
+                    </div>
+                    <div class="titulo-lista-despesa item-flex">
+                        Vencimento
+                        <div class="subtitulo-lista-despesa"> {{ item.dataReferencia | date: 'dd/MM/yyyy'}} </div>
+                    </div>
+                    <div class="titulo-lista-despesa item-flex">
+                        Valor
+                        <div class="subtitulo-lista-despesa">{{ item.valor }}</div>
+                    </div>
+                    <div class="titulo-lista-despesa icon-sem-flex">
+                        <span class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">more_vert</span>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" (click)="abrirModal('#modalAbrirPagamento', item)">Abrir</a>
+                            <a class="dropdown-item" (click)="abrirModal('#modalEditarPagamento', item)">Editar</a>
+                            <a class="dropdown-item" (click)="abrirModal('#modalExcluirPagamento', item)">Excluir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+<div class="modal" tabindex="-1" role="dialog" id="modalSemPagamentoAtivo">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,13 +117,53 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                <button type="button" class="btn btn-primary" (click)="abrirModalCadastroPagamento()">Sim</button>
+                <button type="button" class="btn btn-primary" (click)="excluirPagamento()">Sim</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" id="modalCadastrarPagamento" >
+<div class="modal" tabindex="-1" role="dialog" id="modalExcluirPagamento">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atenção!!!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Deseja remover esse pagamento?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-primary" (click)="excluirPagamento()">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modalExcluirDespesa">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atenção!!!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Deseja remover essa despesa?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-primary" (click)="excluirDespesa()">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modalCadastrarPagamento">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form (submit)="salvar()" method="POST">
@@ -32,7 +176,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="titulo">Título</label>
-                        <input type="text"  class="form-control" id="titulo" name="titulo" [(ngModel)]="pagamento.titulo">
+                        <input type="text" class="form-control" id="titulo" name="titulo" [(ngModel)]="pagamento.titulo">
                     </div>
                     <div class="form-group">
                         <label for="descricao">Descrião</label>
@@ -43,14 +187,14 @@
                         <label for="dataReferencia">Data Recebimento</label>
                         <input type="date" class="form-control" id="dataReferencia" name="dataReferencia" [(ngModel)]="pagamento.dataReferencia">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="valor">Valor</label>
                         <input type="number" class="form-control" id="valor" name="valor" [(ngModel)]="pagamento.valor">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>
             </form>
@@ -58,61 +202,7 @@
     </div>
 </div>
 
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 card-saldo-pagamento">
-
-            <div class="texto-saldo-pagamento">
-                <div>
-                    <span>Saldo Disponível</span>
-                    <h1 class="texto-valor">{{ totalPagamento }}</h1>
-                </div>
-                <div>
-                    <span>Total Despesa em aberto</span>
-                    <h1 class="texto-valor" style="color: red;">- {{ totalDespesa }}</h1>
-                </div>
-            </div>
-
-            <div class="botoes-opcoes">
-                <div class="row">
-                    <div class="botao-home-opcao"  (click)="abrirModalCadastroPagamento()">
-                        <div class="icon-isolado" style="text-align: center;">
-                            <span class="material-icons">add_circle</span>
-                        </div>
-                        <span>Pagamento</span>
-                    </div>
-    
-                    <div class="botao-home-opcao"(click)="abrirModalDespesa()">
-                        <div class="icon-isolado" style="text-align: center;">
-                            <span class="material-icons">add_circle</span>
-                        </div>
-                        <span>Despesa</span>
-                    </div>
-                    
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <h1>Despesas</h1>
-        <div class="col-sm-12 lista-despesa">
-            <div class="objeto-despesa" *ngFor="let item of listaDespesa">
-                <span>{{ item.titulo }}</span>
-                <span>{{ item.descricao }}</span>
-                <span>{{ item.dataVencimento }}</span>
-                <span>{{ item.valor }}</span>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-
-<div class="modal" tabindex="-1" role="dialog" id="modalAdicionarDespesa" >
+<div class="modal" tabindex="-1" role="dialog" id="modalAdicionarDespesa">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form (submit)="adicionarDespesa()" method="POST">
@@ -125,7 +215,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="titulo">Título</label>
-                        <input type="text"  class="form-control" id="titulo" name="titulo" [(ngModel)]="despesa.titulo">
+                        <input type="text" class="form-control" id="titulo" name="titulo" [(ngModel)]="despesa.titulo">
                     </div>
                     <div class="form-group">
                         <label for="descricao">Descrião</label>
@@ -136,12 +226,12 @@
                         <label for="dataReferencia">Data Vencimento</label>
                         <input type="date" class="form-control" id="dataReferencia" name="dataReferencia" [(ngModel)]="despesa.dataVencimento">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="dataReferencia">Data Pagamento</label>
                         <input type="date" class="form-control" id="dataReferencia" name="dataReferencia" [(ngModel)]="despesa.dataPagamento">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="dataReferencia">Data Referência</label>
                         <input type="date" class="form-control" id="dataReferencia" name="dataReferencia" [(ngModel)]="despesa.dataReferencia">
@@ -153,7 +243,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>
             </form>

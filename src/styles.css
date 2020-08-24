@@ -1,5 +1,43 @@
-body { background-color: #50ace4; }
-.direita { float: right }
-.box { background-color: #FFF; border-radius: 10px; padding: 5%; margin-top: 50%;}
-.objeto-centro{ display: flex; flex-direction: row; justify-content: center; align-items: center }
-.texto-valor { font-family: 'Pacifico', cursive; }
+body {
+    background-color: #50ace4;
+}
+
+.direita {
+    float: right
+}
+
+.box {
+    background-color: #FFF;
+    border-radius: 10px;
+    padding: 5%;
+    margin-top: 50%;
+}
+
+.objeto-centro {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
+}
+
+.texto-valor {
+    font-family: 'Pacifico', cursive;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-item {
+    flex: 1;
+    flex-wrap: wrap;
+    font-size: 1em;
+    background-color: #dbdbff;
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px;
+}

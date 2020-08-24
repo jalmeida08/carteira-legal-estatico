@@ -1,5 +1,83 @@
-.card-saldo-pagamento { background-color: #FFF;height: 300px; }
-.texto-saldo-pagamento { text-align: center; }
-.botoes-opcoes{ bottom: 0; position: absolute;}
-.botao-home-opcao { margin: 0 10px; height: 50%;}
-.botao-home-opcao:hover { cursor: pointer; color: rgba(0, 0, 0, 0.6);}
+.card-saldo-pagamento {
+    background-color: #FFF;
+}
+
+.texto-saldo-pagamento {
+    text-align: center;
+}
+
+.botao-home-opcao {
+    margin: 0 10px;
+    height: 50%;
+}
+
+.botao-home-opcao:hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.encapsulamento-tela-saldo-botao-cad {
+    background-color: #FFF;
+}
+
+.row-flex {
+    flex-direction: row;
+}
+
+.container-flex {
+    background-color: #E3E3E3;
+    margin: 5px 0px;
+    padding: 0px 5px;
+    display: flex;
+    border: 1px solid #ccc;
+}
+
+.item-flex {
+    flex: 1;
+    flex-wrap: wrap;
+    margin: 5px;
+    font-size: 1em;
+}
+
+.titulo {
+    position: relative;
+    font-size: 1.3rem;
+    margin: 8px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.titulo::before,
+.titulo::after {
+    content: "";
+    position: absolute;
+    top: 0.80em;
+    width: 1em;
+    height: 0.13em;
+    background-color: #000;
+    left: 5.5em;
+}
+
+.titulo::after {
+    left: initial;
+    right: 5.5em;
+}
+
+.titulo-lista-despesa {
+    font-size: 0.9em;
+}
+
+.subtitulo-lista-despesa {
+    font-size: 0.7em;
+    margin-top: -5px;
+}
+
+.tela-despesa-pagamento>section>.lista-despesa {
+    height: 200px;
+    max-height: 200px;
+    overflow: scroll
+}
+
+.icon-sem-flex {
+    margin-top: 8px
+}
